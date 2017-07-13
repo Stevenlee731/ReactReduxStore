@@ -5,6 +5,7 @@ import * as booksActions from '../../actions/booksActions'
 import {Grid, Col, Row, Button} from 'react-bootstrap'
 import BookItem from './BookItem'
 import BooksForm from './BooksForm'
+import Cart from '../cart/Cart'
 
 class BookList extends Component {
   constructor(props, context) {
@@ -21,9 +22,9 @@ class BookList extends Component {
     }
     const bookList = this.props.books.map(book => {
       return(
-        <Col xs={12} sm={6} md={4} key={book.id}>
+        <Col xs={12} sm={6} md={4} key={book._id}>
           <BookItem
-            id={book.id}
+            _id={book._id}
             title={book.title}
             description={book.description}
             price={book.price}
@@ -33,6 +34,9 @@ class BookList extends Component {
     })
     return (
       <Grid>
+        <Row>
+          <Cart />
+        </Row>
         <Row style={rowStyle}>
           <Col xs={12} sm={6}>
             <BooksForm/>

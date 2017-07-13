@@ -10,14 +10,14 @@ export default function booksReducer(state = initialState.books, action) {
     case types.DELETE_BOOK_SUCCESS:
       const currentBookToDelete = [...state]
       const indexToDelete = currentBookToDelete.findIndex((book) => {
-        return book.id === action.payload.id
+        return book._id === action.payload._id
       })
       return [...currentBookToDelete.slice(0, indexToDelete),
         ...currentBookToDelete.slice(indexToDelete + 1)]
     case types.UPDATE_BOOK_SUCCESS:
       const currentBookToUpdate = [...state]
       const indexToUpdate = currentBookToUpdate.findIndex(book => {
-        return book.id === action.payload.id
+        return book._id === action.payload._id
       })
       const newBookToUpdate = {
         ...currentBookToUpdate[indexToUpdate],
