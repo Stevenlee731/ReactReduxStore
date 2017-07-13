@@ -6,10 +6,3 @@ export function addToCart(book) {
     payload:book;
   }
 }
-
-export function deleteBook(id) {
-  return {
-    type:"DELETE_BOOK",
-    payload: id
-  }
-}
