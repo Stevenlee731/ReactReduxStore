@@ -12,6 +12,17 @@ class Cart extends Component {
     super(props, context);
   }
 
+  onDelete(_id) {
+    const currentBookToDelete = this.props.cart
+    const indexToDelete = currentBookToDelete.findIndex(cart => {
+      return cart._id === _id
+    })
+    let cartAfterDelete = [...currentBookToDelete.slice(0, indexToDelete),
+      ...currentBookToDelete.slice(indexToDelete + 1)]
+
+      this.props.actions.deleteCartItem(cartAfterDelete)
+  }
+
   renderEmpty() {
     return(
       <div></div>
@@ -37,13 +48,13 @@ class Cart extends Component {
                 <Button bsStyle='default' bsSize='small'>-</Button>
                 <Button bsStyle='default' bsSize='small'>+</Button>
                 <span>     </span>
-                <Button bsStyle='danger' bsSize='small'>Delete</Button>
+                <Button onClick={this.onDelete.bind(this, cartItem._id)} bsStyle='danger' bsSize='small'>Delete</Button>
               </ButtonGroup>
             </Col>
           </Row>
         </Panel>
       )
-    })
+    }, this)
     return(
       <Panel
         header="Cart"
@@ -55,13 +66,11 @@ class Cart extends Component {
   }
 
   render() {
-
-      {if (this.props.cart.length > 0) {
-        return this.renderCart()
-      } else {
-        return this.renderEmpty()
-      }}
-
+    {if (this.props.cart.length > 0) {
+      return this.renderCart()
+    } else {
+      return this.renderEmpty()
+    }}
   }
 }
 

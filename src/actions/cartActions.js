@@ -6,3 +6,10 @@ export function addToCart(book) {
     payload: book
   }
 }
+
+export function deleteCartItem(book) {
+  return {
+    type: types.DELETE_CART_ITEM,
+    payload: book
+  }
+}
