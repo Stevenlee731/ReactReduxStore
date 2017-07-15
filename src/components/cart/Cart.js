@@ -72,6 +72,14 @@ class Cart extends Component {
         bsStyle="primary"
         >
         {cartItemsList}
+        <Row>
+          <Col xs={12}>
+            <h6>Total Amount:</h6>
+            <Button bsStyle='success' bsSize='small'>
+              PROCEED TO CHECKOUT
+            </Button>
+          </Col>
+        </Row>
       </Panel>
     )
   }
