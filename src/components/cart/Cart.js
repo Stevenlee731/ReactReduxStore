@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as booksActions from '../../actions/booksActions'
 import * as cartActions from '../../actions/cartActions'
-import {Panel, Col, Well, Row, Button, ButtonGroup, Label} from 'react-bootstrap'
-import BookItem from '../books/BookItem'
-import BooksForm from '../books/BooksForm'
+import {Modal, Panel, Col, Row, Button, ButtonGroup, Label} from 'react-bootstrap'
 
 class Cart extends Component {
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      showModal: false
+    }
+  }
 
+  open(){
+    this.setState({showModal:true})
+  }
+
+  close(){
+    this.setState({showModal:false})
   }
 
   onIncrement(_id) {
@@ -75,11 +82,26 @@ class Cart extends Component {
         <Row>
           <Col xs={12}>
             <h6>Total Amount:</h6>
-            <Button bsStyle='success' bsSize='small'>
+            <Button onClick={this.open.bind(this)} bsStyle='success' bsSize='small'>
               PROCEED TO CHECKOUT
             </Button>
           </Col>
         </Row>
+        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Thank You!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h6>Your order has been saved</h6>
+            <p>You will receive an email confirmation</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Col xs={6}>
+              <h6>total $:</h6>
+            </Col>
+            <Button onClick={this.close.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </Panel>
     )
   }
