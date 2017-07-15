@@ -16,9 +16,25 @@ class BookItem extends Component {
       _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
-      price: this.props.price
+      price: this.props.price,
+      quantity: 1
     }]
-    this.props.actions.addToCart(book)
+
+    if(this.props.cart.length > 0) {
+      let _id = this.props._id
+      let cartIndex = this.props.cart.findIndex(cart => {
+        return cart._id === _id
+      })
+      if (cartIndex === -1) {
+        console.log('adding to cart')
+        this.props.actions.addToCart(book)
+      } else {
+        console.log('updating quantity')
+        this.props.actions.updateCart(_id, 1)
+      }
+    } else {
+      this.props.actions.addToCart(book)
+    }
   }
   render() {
     return (

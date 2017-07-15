@@ -10,6 +10,17 @@ import BooksForm from '../books/BooksForm'
 class Cart extends Component {
   constructor(props, context) {
     super(props, context);
+
+  }
+
+  onIncrement(_id) {
+    this.props.actions.updateCart(_id, 1)
+  }
+
+  onDecrement(_id, quantity) {
+    if(quantity > 1) {
+      this.props.actions.updateCart(_id, -1)
+    }
   }
 
   onDelete(_id) {
@@ -41,12 +52,12 @@ class Cart extends Component {
               <h6>usd. {cartItem.price}</h6>
             </Col>
             <Col xs={12} sm={2}>
-              <h6>qty. <Label bsStyle='success'></Label></h6>
+              <h6>qty. <Label bsStyle='success'>{cartItem.quantity}</Label></h6>
             </Col>
             <Col xs={12} sm={2}>
               <ButtonGroup style={{minWidth:'300px'}}>
-                <Button bsStyle='default' bsSize='small'>-</Button>
-                <Button bsStyle='default' bsSize='small'>+</Button>
+                <Button onClick={this.onDecrement.bind(this, cartItem._id, cartItem.quantity)} bsStyle='default' bsSize='small'>-</Button>
+                <Button onClick={this.onIncrement.bind(this, cartItem._id)} bsStyle='default' bsSize='small'>+</Button>
                 <span>     </span>
                 <Button onClick={this.onDelete.bind(this, cartItem._id)} bsStyle='danger' bsSize='small'>Delete</Button>
               </ButtonGroup>
