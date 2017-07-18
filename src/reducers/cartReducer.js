@@ -25,3 +25,12 @@ export default function cartReducer(state = initialState.cart, action) {
       return state
   }
 }
+
+export function totals(payloadArr) {
+  const totalAmount = payloadArr.map(cartArr => {
+    return cartArr.price * cartArr.quantity
+  }).reduce((sum, value) => {
+    return sum + value
+  }, 0)
+  return {amount:totalAmount.toFixed(2)}
+}
